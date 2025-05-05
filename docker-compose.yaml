@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Servicio principal de Next.js
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: atv-4000-app
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      # Agrega aquí otras variables de entorno que necesites
+    networks:
+      - atv-network
+
+networks:
+  atv-network:
+    driver: bridge
