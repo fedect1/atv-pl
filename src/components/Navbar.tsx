@@ -30,9 +30,9 @@ export const Navbar = () => {
   const formatDate = (date: Date | null) => {
     if (!date) return '...'; // Marcador de posición
 
-    const weekday = date.toLocaleDateString('it-IT', { weekday: 'long' });
+    const weekday = date.toLocaleDateString('pl-PL', { weekday: 'long' });
     const day = date.getDate();
-    const month = date.toLocaleDateString('it-IT', { month: 'long' });
+    const month = date.toLocaleDateString('pl-PL', { month: 'long' });
     const year = date.getFullYear();
 
     const capitalizedWeekday = capitalizeFirstLetter(weekday);
@@ -45,7 +45,7 @@ export const Navbar = () => {
   const formatTime = (date: Date | null) => {
     if (!date) return '...'; // Marcador de posición
 
-    return date.toLocaleTimeString('it-IT', {
+    return date.toLocaleTimeString('pl-PL', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
@@ -60,7 +60,7 @@ export const Navbar = () => {
         <Image
           src="/inno-plast.png" // Asegúrate de que esta ruta sea correcta
           alt="Inno-Plast logo"
-          width={70}
+          width={80}
           height={70}
           className="filter invert brightness-200"
         />
@@ -74,7 +74,7 @@ export const Navbar = () => {
 
       {/* Derecha: Nombre ATV */}
       <div className="flex items-center justify-end w-1/3">
-        <span className="text-xl font-bold">ATV</span>
+        <span className="text-2xl font-bold">ATV</span>
       </div>
     </nav>
   );

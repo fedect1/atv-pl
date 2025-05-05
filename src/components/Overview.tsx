@@ -8,86 +8,93 @@ interface Machine {
     id: string;
     remaining1: string;
     remaining2: string;
+    standardOutput: string;
     alarm: string;
     color: string;
 }
 
 export const Overview = () => {
     const labels = [
-        "Extruder",
-        "Stato",
-        "Portata Attuale [kg/h]",
-        "ID webMIP",
-        "Rimanente Avv.1 Fine [h:min]",
-        "Rimanente Avv.2 Fine [h:min]",
+        "Extr.",
+        "Stan produkcji",
+        "wydajność zad. [kg/h]",
+        "zlecenie",
+        "wydajność zlecenia planu (DS) [kg/h]",
+        "wydajność akt.[kg/h]",
         "Alarm"
     ];
 
     const machines: Machine[] = [
         {
-            name: "M21",
-            status: "Good",
-            flow: "581,1",
-            id: "57272",
-            remaining1: "00:11",
-            remaining2: "01:00",
-            alarm: "No alarm",
+            name: "M1",
+            status: "dobra",
+            flow: "393,8",
+            id: "160572/1",
+            remaining1: "392,4",
+            remaining2: "436,0",
+            standardOutput: "436,0",
+            alarm: "Brak alarmu",
             color: "#ffff00"
         },
         {
-            name: "M22",
-            status: "Scarto",
-            flow: "370,9",
-            id: "56513",
-            remaining1: "05:20",
-            remaining2: "03:21",
-            alarm: "Lack of raw material",
+            name: "M2",
+            status: "dobra",
+            flow: "430,6",
+            id: "160818/1-E",
+            remaining1: "129,6",
+            remaining2: "144,0",
+            standardOutput: "144,0",
+            alarm: "Brak alarmu",
             color: "#008000"
         },
         {
-            name: "M23",
-            status: "Good",
-            flow: "432,5",
-            id: "57232",
-            remaining1: "03:00",
-            remaining2: "2:00",
-            alarm: "No alarm",
+            name: "M3",
+            status: "odpady",
+            flow: "352,9",
+            id: "160617/1",
+            remaining1: "351,9",
+            remaining2: "391,0",
+            standardOutput: "391,0",
+            alarm: "Brak surowca",
             color: "#ff0000"
         },
         {
-            name: "M24",
-            status: "Good",
-            flow: "432,5",
-            id: "57232",
-            remaining1: "03:00",
-            remaining2: "05:00",
-            alarm: "No alarm",
-            color: "#ffffff"
+            name: "M4",
+            status: "dobra",
+            flow: "432,2",
+            id: "160653/3",
+            remaining1: "432,0",
+            remaining2: "480,0",
+            standardOutput: "480,0",
+            alarm: "Brak alarmu",
+            color: "#800080"
         },
         {
-            name: "M25",
-            status: "Good",
-            flow: "432,5",
-            id: "57232",
-            remaining1: "10:00",
-            remaining2: "09:00",
-            alarm: "No alarm",
-            color: "#d2691e"
+            name: "M5",
+            status: "odpady",
+            flow: "110,2",
+            id: "160660/2",
+            remaining1: "108,0",
+            remaining2: "120,0",
+            standardOutput: "120,0",
+            alarm: "Brak alarmu",
+            color: "#008000"
         },
         {
-            name: "M26",
-            status: "Good",
-            flow: "432,5",
-            id: "57232",
-            remaining1: "02:00",
-            remaining2: "01:00",
-            alarm: "No alarm",
-            color: "#0000cd"
+            name: "M6",
+            status: "dobra",
+            flow: "162,0",
+            id: "160693/2",
+            remaining1: "162,0",
+            remaining2: "180,0",
+            standardOutput: "180,0",
+            alarm: "Brak alarmu",
+            color: "#ff8c00"
         }
     ];
 
     const renderRow = (machine: Machine) => {
-        const isAlarmRow = machine.alarm === "Lack of raw material";
+        const isAlarmRow = machine.alarm === "Brak surowca";
         return (
             <tr
                 key={machine.name}
@@ -107,13 +114,13 @@ export const Overview = () => {
                     ></span>
                 {machine.name}
                 </td>
-                <td className="px-6 py-3">{machine.status}</td>
+                <td className="px-6 py-3"><span className={`px-2 py-1 rounded-md ${machine.status === "dobra" ? "bg-green-100" : machine.status === "odpady" ? "bg-yellow-100" : ""}`}>{machine.status}</span></td>
                 <td className="px-6 py-3">{machine.flow}</td>
                 <td className="px-6 py-3">{machine.id}</td>
                 <td className="px-6 py-3">{machine.remaining1}</td>
-                <td className="px-6 py-3">{machine.remaining2}</td>
+                <td className="px-6 py-3">{machine.standardOutput}</td>
                 <td className="px-6 py-3">
-                    {machine.alarm === "Lack of raw material" ? (
+                    {machine.alarm === "Brak surowca" ? (
                         <strong>{machine.alarm}</strong>
                     ) : (
                         machine.alarm
@@ -125,7 +132,7 @@ export const Overview = () => {
 
     return (
         <div className="relative overflow-hidden p-7">
-            <table className="w-full text-sm text-left text-gray-500">
+            <table className="w-full text-left text-gray-700 text-base font-semibold">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-300">
                     <tr>
                         {labels.map(label => (
